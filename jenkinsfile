@@ -8,60 +8,20 @@ try {
         checkout scm
       }
   }
-  stage('init') {
+  stage('Checkins') {
     node {  
-      withCredentials([
-        azureServicePrincipal('azserviceprincipal')]) {
-          ansiColor('xterm') {
-          sh 'terraform init && ls -a'
-          sh 'pwd && ls -a'
-          }     
-        }
+      withCredentials([usernamePassword(credentialsId: 'unameandpassword', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
+    		sh('ls -la')
+		sh('echo "This is a new text file" > new.txt')
+		sh('git add .')
+		sh('git commit -m "Adding txt file from jenkins"')
+		sh('git status')
+    		sh('git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/dikshagwan2810/project.git --tags')
+		sh('ls -la')
+	}
     }  
   }    
-  stage('create workspace') {
-    node {  
-      withCredentials([
-        azureServicePrincipal('azserviceprincipal')]) {
-          ansiColor('xterm') {
-          sh 'terraform workspace new "production"'
-          }     
-        }
-    }  
-  }
-  stage('plan') {
-    node {  
-      withCredentials([
-        azureServicePrincipal('azserviceprincipal')]) {
-          ansiColor('xterm') {
-          sh 'pwd && ls -a'
-	  sh 'ssh-keygen -t rsa -N "" -f "/var/lib/jenkins/.ssh/id_rsa" -b 4096 -y && ls -la /var/lib/jenkins/.ssh/id_rsa'
-          sh 'terraform plan -var-file="./prod.tfvars" -out ./terraform.tfstate.d/production/prod.tfplan'
-          }     
-        }
-    }  
-  }
-  stage('apply') {
-    node {  
-      withCredentials([
-        azureServicePrincipal('azserviceprincipal')]) {
-          ansiColor('xterm') {
-	  sh 'terraform apply "./terraform.tfstate.d/production/prod.tfplan"'
-          }     
-        }
-    }  
-  }
-  stage('show') {
-    node {  
-      withCredentials([
-        azureServicePrincipal('azserviceprincipal')]) {
-          ansiColor('xterm') {
-          sh 'terraform show'
-          }     
-        }
-    }  
-  }
-}
+ }
 catch (org.jenkinsci.plugins.workflow.steps.FlowInterruptedException flowError) {
   currentBuild.result = 'ABORTED'
 }
