@@ -8,9 +8,9 @@ try {
         checkout scm
       }
   }
-  stage('promotion') {
+  stage('Build') {
     node {  
-    	sh('echo "in promotion now"')
+    	sh('echo "in Build PL now"')
      // withCredentials([usernamePassword(credentialsId: 'unameandpassword', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
     	//	sh('ls -la')
 	//	sh('echo "This is a new text file" > new.txt')
@@ -22,9 +22,9 @@ try {
 	//}
     }  
   } 
-  stage('Approved') {
+  stage('Deploy') {
      node {  
-    	sh('echo "Promotion Done"')
+    	sh('echo "performing deployment"')
  }
 catch (org.jenkinsci.plugins.workflow.steps.FlowInterruptedException flowError) {
   currentBuild.result = 'ABORTED'
