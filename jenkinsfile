@@ -8,19 +8,23 @@ try {
         checkout scm
       }
   }
-  stage('Checkins') {
+  stage('promotion') {
     node {  
-      withCredentials([usernamePassword(credentialsId: 'unameandpassword', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
-    		sh('ls -la')
-		sh('echo "This is a new text file" > new.txt')
-		sh('git add .')
-		sh('git commit -m "Adding txt file from jenkins"')
-		sh('git status')
-    		sh('git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/dikshagwan2810/project.git HEAD:master')
-		sh('ls -la')
-	}
+    	sh('echo "in promotion now"')
+     // withCredentials([usernamePassword(credentialsId: 'unameandpassword', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
+    	//	sh('ls -la')
+	//	sh('echo "This is a new text file" > new.txt')
+	//	sh('git add .')
+	//	sh('git commit -m "Adding txt file from jenkins"')
+	//	sh('git status')
+    	//	sh('git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/dikshagwan2810/project.git HEAD:master')
+	//	sh('ls -la')
+	//}
     }  
-  }    
+  } 
+  stage('Approved') {
+     node {  
+    	sh('echo "Promotion Done"')
  }
 catch (org.jenkinsci.plugins.workflow.steps.FlowInterruptedException flowError) {
   currentBuild.result = 'ABORTED'
