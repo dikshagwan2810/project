@@ -25,6 +25,8 @@ try {
   stage('Deploy') {
      node {  
     	sh('echo "performing deployment"')
+	}
+    }
  }
 catch (org.jenkinsci.plugins.workflow.steps.FlowInterruptedException flowError) {
   currentBuild.result = 'ABORTED'
