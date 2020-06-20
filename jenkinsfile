@@ -32,10 +32,12 @@ try {
 		emailext body: '''Hi,
 
 		Kindly approve the request for deployment in production environment.
+		
+		Thanks
 		''', 
+		recipientProviders: [requestor()], 
 		subject: 'Request to approve the deployment for Production Environment', 
-		to: 'dikshagwan2810@gmail.com'
-     }
+		to: 'diksha.agwan@igglobal.com'
   }
  }
 catch (org.jenkinsci.plugins.workflow.steps.FlowInterruptedException flowError) {
