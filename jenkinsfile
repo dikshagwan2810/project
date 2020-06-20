@@ -27,6 +27,16 @@ try {
     	sh('echo "performing deployment"')
 	}
     }
+  stage('Notify') {
+     node {
+		emailext body: '''Hi,
+
+		Kindly approve the request for deployment in production environment.
+		''', 
+		subject: 'Request to approve the deployment for Production Environment', 
+		to: 'dikshagwan2810@gmail.com'
+     }
+  }
  }
 catch (org.jenkinsci.plugins.workflow.steps.FlowInterruptedException flowError) {
   currentBuild.result = 'ABORTED'
