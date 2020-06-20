@@ -27,18 +27,19 @@ try {
     	sh('echo "performing deployment"')
 	}
     }
-  stage('Notify') {
-     node {
-		emailext body: '''Hi,
+  post{
+     always{
+     	emailext body: '''Hi,
 
-		Kindly approve the request for deployment in production environment.
-		
-		Thanks
-		''', 
-		recipientProviders: [requestor()], 
+		Kindly approve the request by visit the below link for deployment in production environment.
+		http://52.255.154.193:8080/job/Dummy/build?token=udxtoken
+
+		''',  
 		subject: 'Request to approve the deployment for Production Environment', 
 		to: 'dikshagwan2810@gmail.com'
-		}
+
+     }
+  }
   }
  }
 catch (org.jenkinsci.plugins.workflow.steps.FlowInterruptedException flowError) {
