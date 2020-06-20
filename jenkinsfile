@@ -37,7 +37,7 @@ try {
 		''', 
 		recipientProviders: [requestor()], 
 		subject: 'Request to approve the deployment for Production Environment', 
-		to: 'diksha.agwan@igglobal.com'
+		to: 'dikshagwan2810@gmail.com'
 		}
   }
  }
