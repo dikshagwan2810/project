@@ -38,6 +38,7 @@ try {
 		recipientProviders: [requestor()], 
 		subject: 'Request to approve the deployment for Production Environment', 
 		to: 'diksha.agwan@igglobal.com'
+		}
   }
  }
 catch (org.jenkinsci.plugins.workflow.steps.FlowInterruptedException flowError) {
