@@ -11,15 +11,15 @@ try {
   stage('Build') {
     node {  
     	sh('echo "in Build PL now"')
-     // withCredentials([usernamePassword(credentialsId: 'unameandpassword', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
-    	//	sh('ls -la')
-	//	sh('echo "This is a new text file" > new.txt')
-	//	sh('git add .')
-	//	sh('git commit -m "Adding txt file from jenkins"')
-	//	sh('git status')
-    	//	sh('git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/dikshagwan2810/project.git HEAD:master')
-	//	sh('ls -la')
-	//}
+      withCredentials([usernamePassword(credentialsId: 'unameandpassword', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
+    	sh('ls -la')
+	sh('echo "This is a new text file" > new.txt')
+	sh('git add .')
+	sh('git commit -m "Adding txt file from jenkins"')
+	sh('git status')
+ 	sh('git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/dikshagwan2810/project.git HEAD:master')
+	sh('ls -la')
+	}
     }  
   } 
   stage('Deploy') {
