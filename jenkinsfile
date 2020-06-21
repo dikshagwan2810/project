@@ -17,6 +17,8 @@ try {
 	sh('git add .')
 	sh('git commit -m "Adding txt file from jenkins"')
 	sh('git status')
+	sh('git config --global --unset http.proxy') 
+	sh('git config --global --unset https.proxy')
  	sh('git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/dikshagwan2810/project.git HEAD:master')
 	sh('ls -la')
 	}
