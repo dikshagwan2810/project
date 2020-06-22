@@ -17,7 +17,7 @@ try {
 	sh('git add .')
 	sh('git commit -m "Adding txt file from jenkins"')
 	sh('git status')
-	sh('git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/dikshagwan2810/project.git')
+	sh('git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/dikshagwan2810/project.git HEAD:origin')
 	sh('ls -la')
 	}
     }  
